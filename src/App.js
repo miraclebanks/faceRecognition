@@ -8,8 +8,6 @@ import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import "./App.css";
 
-//You must add your own API key here from Clarifai.
-
 const particlesOptions = {
   particles: {
     number: {
@@ -77,7 +75,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("http://localhost:3000/imageurl", {
+    fetch("https://fast-ravine-18216.herokuapp.com/imageurl", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -87,7 +85,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((response) => {
         if (response) {
-          fetch("http://localhost:3000/image", {
+          fetch("https://fast-ravine-18216.herokuapp.com:3000/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -126,10 +124,7 @@ class App extends Component {
         {route === "home" ? (
           <div>
             <Logo />
-            <Rank
-              name={this.state.user.name}
-              entries={this.state.user.entries}
-            />
+
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
